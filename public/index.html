@@ -566,7 +566,7 @@ async function renderCanvas(){
   let cy2 = y + lineH;
 
   for(const l of lines){
-    if(l.type==='spacer'){ cy2 += lineH*0.4; continue; }
+    if(l.type==='spacer'){ cy2 += lineH*1.2; continue; }
     if(l.type==='line'){
       const lg=ctx.createLinearGradient(0,0,W,0);
       lg.addColorStop(0,'transparent'); lg.addColorStop(.5,l.color); lg.addColorStop(1,'transparent');
