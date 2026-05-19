@@ -240,20 +240,20 @@ body{background:var(--bg);color:var(--text);font-family:var(--ge);min-height:100
     <!-- الاسم الأول (كبير) -->
     <div class="field">
       <label class="field-label">
-        الاسم الأول للخريج
+        الاسم الأول
         <span id="nameLockBadge" class="lock-badge">
           <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
           مقفول
           <button class="unlock-btn" id="unlockBtn" onclick="unlockNamesOnce()">تعديل ✏️</button>
         </span>
       </label>
-      <input type="text" id="firstName" class="input" placeholder="مثال: غادة">
+      <input type="text" id="firstName" class="input" placeholder="مثال: علي">
     </div>
 
     <!-- باقي الاسم -->
     <div class="field">
       <label class="field-label">اسم الأب والجد</label>
-      <input type="text" id="lastName" class="input" placeholder="مثال: بنت عامر العمري">
+      <input type="text" id="lastName" class="input" placeholder="مثال: بن محمد العمري">
     </div>
 
     <div class="divider"><div class="line"></div><div class="orn">❦</div><div class="line"></div></div>
@@ -566,6 +566,7 @@ async function renderCanvas(){
   let cy2 = y + lineH;
 
   for(const l of lines){
+    if(l.type==='spacer'){ cy2 += lineH*0.4; continue; }
     if(l.type==='line'){
       const lg=ctx.createLinearGradient(0,0,W,0);
       lg.addColorStop(0,'transparent'); lg.addColorStop(.5,l.color); lg.addColorStop(1,'transparent');
