@@ -556,14 +556,14 @@ async function renderCanvas(){
     if(S.majorEn) lines.push({txt:S.majorEn, size:17, color:'rgba(200,230,201,.55)', family:GE});
   }
   lines.push({type:'line', color:'rgba(39,174,96,.5)'});
-  lines.push({txt:S.firstName, size:62, color:'#FFFFFF', weight:'700', family:GE});
-  if(S.lastName) lines.push({txt:S.lastName, size:24, color:'rgba(200,230,201,.85)', family:GE});
+  lines.push({txt:S.firstName, size:62, color:'#FFFFFF', weight:'700', family:GE, id:'fname'});
   lines.push({type:'line', color:'rgba(39,174,96,.4)'});
   lines.push({txt:'@lamst_design', size:18, color:'rgba(39,174,96,.75)', family:GE});
 
   // توزيع الارتفاع
   const lineH = gap / (lines.length + 1);
   let cy2 = y + lineH;
+  let fnameY = 0;
 
   for(const l of lines){
     if(l.type==='spacer'){ cy2 += lineH*1.2; continue; }
@@ -574,8 +574,14 @@ async function renderCanvas(){
       ctx.beginPath(); ctx.moveTo(80,cy2); ctx.lineTo(W-80,cy2); ctx.stroke();
     } else {
       txt(l.txt, cx, cy2, {size:l.size||22, color:l.color||'#fff', weight:l.weight||'400', family:l.family||GE});
+      if(l.id==='fname') fnameY = cy2;
     }
     cy2 += lineH;
+  }
+
+  // اسم الأب تحت الاسم الرئيسي بـ offset ثابت
+  if(S.lastName && fnameY>0){
+    txt(S.lastName, cx, fnameY+72, {size:24, color:'rgba(200,230,201,.85)', family:GE});
   }
 
   load.style.display='none'; canvas.style.display='block';
